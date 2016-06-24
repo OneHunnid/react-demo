@@ -55,7 +55,7 @@ export default class ConfigPanel extends React.Component {
 
         <div className="panel__button-wrapper">
           <div className="panel__button">Cancel</div>
-          <div className="panel__button delete js-delete"></div>
+          <div className="panel__button delete js-delete">Delete</div>
           <div className="panel__button">Save</div>
         </div>
       </section>
