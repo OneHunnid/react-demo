@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default class ExitModal extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
     return (
       <div id="modalExit" className="modal-exit showtime">

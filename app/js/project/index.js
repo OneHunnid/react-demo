@@ -2,9 +2,8 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-import ConfigPanel from './component/ConfigPanel';
 import Home from './pages/Home';
-// import ConfigPanel from './pages/ConfigPanel';
+import ConfigPanel from './pages/ConfigPanel';
 import ExitModal from './pages/ExitModal';
 
 export default class Project {
