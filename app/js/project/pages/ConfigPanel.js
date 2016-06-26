@@ -46,9 +46,9 @@ export default class ConfigPanel extends React.Component {
       <section id="panel" className="panel">
         <div className="panel__header">
           <div className="panel__header-title">Blog Settings</div>
-            <a href="#" className="panel__tabs active" onClick={this.onClickDisplayBasicPage}>Basic</a>
-            <a href="#" className="panel__tabs" onClick={this.onClickDisplayMediaPage}>Media</a>
-            <a href="#" className="panel__tabs" onClick={this.onClickDisplayAdvancedPage}>Advanced</a>
+            <div href="#" className="panel__tabs active" onClick={this.onClickDisplayBasicPage}>Basic</div>
+            <div className="panel__tabs" onClick={this.onClickDisplayMediaPage}>Media</div>
+            <div href="#" className="panel__tabs" onClick={this.onClickDisplayAdvancedPage}>Advanced</div>
         </div>
 
         {currentState}
