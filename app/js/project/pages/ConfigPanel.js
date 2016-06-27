@@ -43,20 +43,22 @@ export default class ConfigPanel extends React.Component {
     }
 
     return (
-      <section id="panel" className="panel">
-        <div className="panel__header">
-          <div className="panel__header-title">Blog Settings</div>
-            <div href="#" className="panel__tabs active" onClick={this.onClickDisplayBasicPage}>Basic</div>
-            <div className="panel__tabs" onClick={this.onClickDisplayMediaPage}>Media</div>
-            <div href="#" className="panel__tabs" onClick={this.onClickDisplayAdvancedPage}>Advanced</div>
-        </div>
+      <section className="main-content"> 
+        <div id="panel" className="panel">
+          <div className="panel__header">
+            <div className="panel__header-title">Blog Settings</div>
+              <div href="#" className="panel__tabs active" onClick={this.onClickDisplayBasicPage}>Basic</div>
+              <div className="panel__tabs" onClick={this.onClickDisplayMediaPage}>Media</div>
+              <div href="#" className="panel__tabs" onClick={this.onClickDisplayAdvancedPage}>Advanced</div>
+          </div>
 
-        {currentState}
+          {currentState}
 
-        <div className="panel__button-wrapper">
-          <div className="panel__button">Cancel</div>
-          <div className="panel__button delete js-delete">Delete</div>
-          <div className="panel__button">Save</div>
+          <div className="panel__button-wrapper">
+            <div className="panel__button">Cancel</div>
+            <div className="panel__button delete js-delete">Delete</div>
+            <div className="panel__button">Save</div>
+          </div>
         </div>
       </section>
     );

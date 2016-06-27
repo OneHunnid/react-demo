@@ -15,10 +15,10 @@ class Navigation extends React.Component {
 export default class Home extends React.Component {
   render() {
     return (
-      <section>
+      <section className="container">
         <header className="header">
-          <Link to="/"><h1>Welcome!</h1></Link>
-          <p>This is a React JS practice area for education and personal development.</p>
+          <Link to="/"><h1 className="site-title">UI Components</h1></Link>
+          <p>This site showcases User Interface components built in React by Chris Limbrick.</p>
           <Navigation />
         </header>
         {this.props.children}
