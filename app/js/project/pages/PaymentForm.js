@@ -1,0 +1,71 @@
+import React from 'react';
+import PaymentStore from './../store/paymentStore';
+
+class InitialPaymentScreen extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    console.log(this.props)
+    return (
+      <div className="pay-form">
+        <div className="pay-form-wrapper">
+          <div className="pay-form-title">Payment Information</div>
+          <form className="payment-form">
+            <div className="payment-form-wrap payment-form-cc-name">
+              <label className="payment-form-label">Name on Card</label>
+              <input className="payment-form-input js-cc-name" placeholder="Enter your name..."/>
+            </div>
+            <div className="payment-form-wrap payment-form-cc">
+              <label className="payment-form-label">Card Number</label>
+              <input className="payment-form-input js-cc-number" placeholder="1234 5678 9012 3456"/>
+            </div>
+            <div className="payment-form-wrap payment-form-exp">
+              <label className="payment-form-label">Expiration</label>
+              <input className="payment-form-input js-cc-expiration" placeholder="04/17"/>
+            </div>
+            <div className="payment-form-wrap payment-form-cvv">
+              <label className="payment-form-label">CVV</label>
+              <input className="payment-form-input js-cc-cvv" placeholder="123"/>
+            </div>
+            <div className="payment-form-submit" onClick={this.props.store.handleClickNext}>Next</div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
+
+class ThankYouMessage extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return(
+      <div>Thanks!</div>
+    );
+
+  }
+}
+
+class PaymentForm extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <section className="main-content payment-form-wrapper">
+        <InitialPaymentScreen store={this.props.store}/>
+      </section>
+    );
+  }
+}
+
+export default class PaymentFormWrapper extends React.Component {
+  render() {
+    return (
+      <PaymentForm store={PaymentStore} mode="foo"/>
+    );
+  }
+}

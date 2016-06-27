@@ -7,6 +7,7 @@ class Navigation extends React.Component {
       <nav className="navigation">
         <Link to="config-panel" className="navigation-link">Config Panel</Link>
         <Link to="exit-modal" className="navigation-link">Exit Modal</Link>
+        <Link to="payment-form" className="navigation-link">Payment Form</Link>
       </nav>
     );
   }

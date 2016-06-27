@@ -43,7 +43,7 @@ export default class ConfigPanel extends React.Component {
     }
 
     return (
-      <section className="main-content"> 
+      <section className="main-content">
         <div id="panel" className="panel">
           <div className="panel__header">
             <div className="panel__header-title">Blog Settings</div>
