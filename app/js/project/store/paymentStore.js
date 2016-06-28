@@ -14,7 +14,7 @@ let PaymentStore = {
       field.classList.add('error');
       console.log("Error: Please enter the first and last name on your credit card");
 
-      return "Error: Please enter the first and last name on your credit card";
+      return false;
     }
     else {
       field.classList.remove('error');
@@ -27,16 +27,15 @@ let PaymentStore = {
         return capitalized;
       })
       const isFormatted = isFormattedArray.join(" ").trim();
-      console.log(isFormatted)
       return isFormatted;
     }
   },
-  santizeCCNumber(numbers, field) {
+  sanitizeCCNumber(numbers, field) {
     if (numbers.length < 16) {
       field.classList.add('error');
 
       console.log("Error: Please enter a valid credit card number");
-      return "Error: Please enter a valid credit card number";
+      return false;
     } else {
       field.classList.remove('error');
       const splitNumbers = numbers.toString().match(/\d{1,4}/g);
@@ -44,11 +43,37 @@ let PaymentStore = {
 
       const numberValidation =  valid.number(numbers);
 
-      const foo = {
+      const ccNumbObj = {
         'format' : spacedNumbers,
         'validation': numberValidation,
       }
-      return foo;
+      return ccNumbObj;
+    }
+  },
+  sanitizeExpiration(exp, field) {
+    if (exp === '') {
+      field.classList.add('error');
+
+      console.log("Error: Please enter a valid expiration date");
+    }
+    else {
+      field.classList.remove('error');
+      const expObj = valid.expirationDate(exp);
+
+      return expObj;
+    }
+  },
+  sanitizeCVV(cvv, field) {
+    if (cvv === '') {
+      field.classList.add('error');
+
+      console.log("Error: Please enter a valid CVV");
+    }
+    else {
+      field.classList.remove('error');
+      const cvvObj = valid.cvv(cvv);
+
+      return cvvObj;
     }
   },
   validateFields() {
@@ -61,14 +86,11 @@ let PaymentStore = {
     const ccCVVField = document.querySelector('.js-cc-cvv');
     const ccCVV = ccCVVField.value;
 
-    // returns formatted/santized name
-    const nameNode = this.sanitizeNameInput(ccName, ccNameField);
-    // returns formatted/detailed card info
-    const ccNumberNode = this.santizeCCNumber(ccNumber, ccNumberField);
-    // returns card type
-    const ccCardType = ccNumberNode.validation.card.type;
+    const ccnameNode = this.sanitizeNameInput(ccName, ccNameField);
+    const ccNumberNode = this.sanitizeCCNumber(ccNumber, ccNumberField);
+    const ccExpirationNode = this.sanitizeExpiration(ccExpiration, ccExpirationField);
+    const ccCVVNode = this.sanitizeCVV(ccCVV, ccCVVField);
 
-    console.log(ccCardType)
   },
   init() {
     this.validateFields();
