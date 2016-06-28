@@ -6,7 +6,7 @@ class InitialPaymentScreen extends React.Component {
     super(props)
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div className="pay-form">
         <div className="pay-form-wrapper">
@@ -52,15 +52,10 @@ class PaymentForm extends React.Component {
   constructor(props) {
     super(props)
   }
-
-  changeTitle(title) {
-    this.setState({title});
-  }
-
   render() {
     return (
       <section className="main-content payment-form-wrapper">
-        <InitialPaymentScreen changeTitle={this.changeTitle.bind(this)} store={this.props.store}/>
+        <InitialPaymentScreen store={this.props.store} />
       </section>
     );
   }
@@ -69,7 +64,7 @@ class PaymentForm extends React.Component {
 export default class PaymentFormWrapper extends React.Component {
   render() {
     return (
-      <PaymentForm store={PaymentStore} mode="foo"/>
+      <PaymentForm store={PaymentStore}/>
     );
   }
 }

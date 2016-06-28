@@ -1,15 +1,8 @@
 import valid from 'card-validator';
-let mode = "foo";
-
-console.log(valid)
+const hasWhitespace = new RegExp (/^\s+$/);
 
 let PaymentStore = {
-  displayThankYou(ccName) {
-      // console.log(ccName)
-  },
   sanitizeNameInput(name, field) {
-    const hasWhitespace = new RegExp (/^\s+$/);
-
     if (hasWhitespace.test(name) || name === '') {
       field.classList.add('error');
       console.log("Error: Please enter the first and last name on your credit card");
@@ -27,11 +20,12 @@ let PaymentStore = {
         return capitalized;
       })
       const isFormatted = isFormattedArray.join(" ").trim();
+
       return isFormatted;
     }
   },
   sanitizeCCNumber(numbers, field) {
-    if (numbers.length < 16) {
+    if (numbers.length < 16 || hasWhitespace.test(numbers)) {
       field.classList.add('error');
 
       console.log("Error: Please enter a valid credit card number");
@@ -40,18 +34,18 @@ let PaymentStore = {
       field.classList.remove('error');
       const splitNumbers = numbers.toString().match(/\d{1,4}/g);
       const spacedNumbers = splitNumbers.join(" ");
-
       const numberValidation =  valid.number(numbers);
 
       const ccNumbObj = {
         'format' : spacedNumbers,
         'validation': numberValidation,
       }
+
       return ccNumbObj;
     }
   },
   sanitizeExpiration(exp, field) {
-    if (exp === '') {
+    if (exp === '' || hasWhitespace.test(exp)) {
       field.classList.add('error');
 
       console.log("Error: Please enter a valid expiration date");
@@ -64,7 +58,7 @@ let PaymentStore = {
     }
   },
   sanitizeCVV(cvv, field) {
-    if (cvv === '') {
+    if (cvv === '' || hasWhitespace.test(cvv)) {
       field.classList.add('error');
 
       console.log("Error: Please enter a valid CVV");
@@ -86,10 +80,21 @@ let PaymentStore = {
     const ccCVVField = document.querySelector('.js-cc-cvv');
     const ccCVV = ccCVVField.value;
 
-    const ccnameNode = this.sanitizeNameInput(ccName, ccNameField);
+    const ccNameNode = this.sanitizeNameInput(ccName, ccNameField);
     const ccNumberNode = this.sanitizeCCNumber(ccNumber, ccNumberField);
     const ccExpirationNode = this.sanitizeExpiration(ccExpiration, ccExpirationField);
     const ccCVVNode = this.sanitizeCVV(ccCVV, ccCVVField);
+
+    const ccData = {
+      "Name" : ccNameNode,
+      "CC Number": ccNumberNode,
+      "CC EXP": ccExpirationNode,
+      "CC CVV": ccCVVNode,
+    }
+
+    // @TODO
+    // 1) Format name, number and expiration when typing in real time
+    // 2) If everything is valid, update state to display a thank you message
 
   },
   init() {
