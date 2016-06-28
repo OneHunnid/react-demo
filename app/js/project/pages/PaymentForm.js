@@ -14,21 +14,21 @@ class InitialPaymentScreen extends React.Component {
           <form className="payment-form">
             <div className="payment-form-wrap payment-form-cc-name">
               <label className="payment-form-label">Name on Card</label>
-              <input className="payment-form-input js-cc-name" placeholder="Enter your name..."/>
+              <input className="payment-form-input js-cc-name" maxLength="50" placeholder="Enter your name..." type="text"/>
             </div>
             <div className="payment-form-wrap payment-form-cc">
               <label className="payment-form-label">Card Number</label>
-              <input className="payment-form-input js-cc-number" placeholder="1234 5678 9012 3456"/>
+              <input className="payment-form-input js-cc-number" placeholder="1234 5678 9012 3456" type="number"/>
             </div>
             <div className="payment-form-wrap payment-form-exp">
               <label className="payment-form-label">Expiration</label>
-              <input className="payment-form-input js-cc-expiration" placeholder="04/17"/>
+              <input className="payment-form-input js-cc-expiration" placeholder="04/17" type="number" min="0"/>
             </div>
             <div className="payment-form-wrap payment-form-cvv">
               <label className="payment-form-label">CVV</label>
-              <input className="payment-form-input js-cc-cvv" placeholder="123"/>
+              <input className="payment-form-input js-cc-cvv" placeholder="123" type="number"/>
             </div>
-            <div className="payment-form-submit" onClick={this.props.store.handleClickNext}>Next</div>
+            <div className="payment-form-submit" onClick={this.props.store.init.bind(this.props.store)}>Next</div>
           </form>
         </div>
       </div>
@@ -53,10 +53,14 @@ class PaymentForm extends React.Component {
     super(props)
   }
 
+  changeTitle(title) {
+    this.setState({title});
+  }
+
   render() {
     return (
       <section className="main-content payment-form-wrapper">
-        <InitialPaymentScreen store={this.props.store}/>
+        <InitialPaymentScreen changeTitle={this.changeTitle.bind(this)} store={this.props.store}/>
       </section>
     );
   }
