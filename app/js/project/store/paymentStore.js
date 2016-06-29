@@ -3,6 +3,7 @@ const hasWhitespace = new RegExp (/^\s+$/);
 
 let PaymentStore = {
   sanitizeNameInput(name, field) {
+
     if (hasWhitespace.test(name) || name === '') {
       field.classList.add('error');
       console.log("Error: Please enter the first and last name on your credit card");
@@ -10,31 +11,36 @@ let PaymentStore = {
       return false;
     }
     else {
-      field.classList.remove('error');
       const isCleaned = name.replace(/[0-9]/g, '');
       const isSplit = isCleaned.split(" ");
 
       const isFormattedArray = isSplit.map(function(i) {
         const firstLetterIsCapitalized = i.charAt(0).toUpperCase();
         const capitalized = firstLetterIsCapitalized + i.substr(1).toLowerCase();
+
         return capitalized;
-      })
+      });
       const isFormatted = isFormattedArray.join(" ").trim();
+
+      field.classList.remove('error');
 
       return isFormatted;
     }
   },
   sanitizeCCNumber(numbers, field) {
-    if (numbers.length < 16 || hasWhitespace.test(numbers)) {
+    const numberValidation =  valid.number(numbers);
+
+    if (numberValidation.isValid === false) {
       field.classList.add('error');
 
       console.log("Error: Please enter a valid credit card number");
       return false;
-    } else {
-      field.classList.remove('error');
+    }
+    else {
       const splitNumbers = numbers.toString().match(/\d{1,4}/g);
       const spacedNumbers = splitNumbers.join(" ");
-      const numberValidation =  valid.number(numbers);
+
+      field.classList.remove('error');
 
       const ccNumbObj = {
         'format' : spacedNumbers,
@@ -45,27 +51,31 @@ let PaymentStore = {
     }
   },
   sanitizeExpiration(exp, field) {
-    if (exp === '' || hasWhitespace.test(exp)) {
+    const expObj = valid.expirationDate(exp);
+
+    if (expObj.isValid === false) {
       field.classList.add('error');
 
       console.log("Error: Please enter a valid expiration date");
+      return false;
     }
     else {
       field.classList.remove('error');
-      const expObj = valid.expirationDate(exp);
 
       return expObj;
     }
   },
   sanitizeCVV(cvv, field) {
-    if (cvv === '' || hasWhitespace.test(cvv)) {
+    const cvvObj = valid.cvv(cvv);
+
+    if (cvvObj.isValid === false) {
       field.classList.add('error');
 
       console.log("Error: Please enter a valid CVV");
+      return false;
     }
     else {
       field.classList.remove('error');
-      const cvvObj = valid.cvv(cvv);
 
       return cvvObj;
     }
@@ -91,6 +101,8 @@ let PaymentStore = {
       "CC EXP": ccExpirationNode,
       "CC CVV": ccCVVNode,
     }
+
+    console.log(ccData);
 
     // @TODO
     // 1) Format name, number and expiration when typing in real time
