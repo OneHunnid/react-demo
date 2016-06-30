@@ -2,11 +2,36 @@ import valid from 'card-validator';
 const hasWhitespace = new RegExp (/^\s+$/);
 
 let PaymentStore = {
+  displayError() {
+    const field = document.querySelector('.js-error-hook');
+    const newNode = document.createElement('span');
+    const messageNode = document.createTextNode("Uh oh! Please fix the highlighted errors");
+    const parentDiv = field.parentNode;
+
+    newNode.classList.add('js-show-error', 'js-error');
+    newNode.appendChild(messageNode);
+
+    if (field.classList.contains('js-show-error') === false) {
+      field.classList.add('js-show-error');
+      const error = parentDiv.insertBefore(newNode, field);
+
+      return error;
+    }
+  },
+  removeError() {
+    const field = document.querySelector('.js-error-hook');
+    const node = document.querySelector('span.js-error');
+    const parentNode = node.parentNode;
+
+    if (node.classList.contains('js-show-error') === true) {
+      field.classList.remove('js-show-error');
+      parentNode.removeChild(node);
+    }
+  },
   sanitizeNameInput(name, field) {
 
     if (hasWhitespace.test(name) || name === '') {
       field.classList.add('error');
-      console.log("Error: Please enter the first and last name on your credit card");
 
       return false;
     }
@@ -29,11 +54,11 @@ let PaymentStore = {
   },
   sanitizeCCNumber(numbers, field) {
     const numberValidation =  valid.number(numbers);
+    const errorMsg = "Please enter a valid number";
 
     if (numberValidation.isValid === false) {
       field.classList.add('error');
 
-      console.log("Error: Please enter a valid credit card number");
       return false;
     }
     else {
@@ -56,7 +81,6 @@ let PaymentStore = {
     if (expObj.isValid === false) {
       field.classList.add('error');
 
-      console.log("Error: Please enter a valid expiration date");
       return false;
     }
     else {
@@ -71,7 +95,6 @@ let PaymentStore = {
     if (cvvObj.isValid === false) {
       field.classList.add('error');
 
-      console.log("Error: Please enter a valid CVV");
       return false;
     }
     else {
@@ -102,7 +125,19 @@ let PaymentStore = {
       "CC CVV": ccCVVNode,
     }
 
-    console.log(ccData);
+    // If ccData is false, display error message
+    for (var i in ccData) {
+      if(ccData[i] == false) {
+        this.displayError();
+        console.log('adding error message');
+      }
+      else {
+        this.removeError();
+        console.log('removing error message')
+      }
+    }
+
+    // console.log(ccData);
 
     // @TODO
     // 1) Format name, number and expiration when typing in real time

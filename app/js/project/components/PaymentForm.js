@@ -11,7 +11,7 @@ class InitialPaymentScreen extends React.Component {
       <div className="pay-form">
         <div className="pay-form-wrapper">
           <div className="pay-form-title">Payment Information</div>
-          <form className="payment-form">
+          <form className="payment-form js-error-hook">
             <div className="payment-form-wrap payment-form-cc-name">
               <label className="payment-form-label">Name on Card</label>
               <input className="payment-form-input js-cc-name" maxLength="50" placeholder="Enter your name..." type="text"/>
