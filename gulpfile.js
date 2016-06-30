@@ -28,4 +28,6 @@ gulp.task('less', require('./gulp/gulp-tasks/compileStyles')(gulp, plugins, STYL
 gulp.task('html', require('./gulp/gulp-tasks/reloadHTML')(gulp, plugins, plugins.connect));
 gulp.task('connect', require('./gulp/gulp-tasks/webserver')(gulp, plugins, plugins.connect));
 gulp.task('watch', require('./gulp/gulp-tasks/watch')(gulp));
-gulp.task('default', ['js', 'less', 'connect', 'watch']);
+gulp.task('copy-html', require('./gulp/gulp-tasks/copy-html')(gulp));
+gulp.task('copy-assets', require('./gulp/gulp-tasks/copy-assets')(gulp));
+gulp.task('default', ['js', 'less', 'connect', 'copy-html', 'copy-assets', 'watch']);
