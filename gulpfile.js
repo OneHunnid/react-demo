@@ -10,6 +10,7 @@ var exec = require('child_process').exec;
 var babel = require('babelify');
 var watchify = require('watchify');
 var browserify = require('browserify');
+var ghPages = require('gulp-gh-pages');
 
 cleancss = new lessPluginCleanCSS({ advanced: true });
 autoprefix = new lessPluginAutoPrefix({ browser: ["last 2 versions"] });
@@ -30,4 +31,5 @@ gulp.task('connect', require('./gulp/gulp-tasks/webserver')(gulp, plugins, plugi
 gulp.task('watch', require('./gulp/gulp-tasks/watch')(gulp));
 gulp.task('copy-html', require('./gulp/gulp-tasks/copy-html')(gulp));
 gulp.task('copy-assets', require('./gulp/gulp-tasks/copy-assets')(gulp));
+gulp.task('deploy', require('./gulp/gulp-tasks/deploy')(gulp, ghPages));
 gulp.task('default', ['js', 'less', 'connect', 'copy-html', 'copy-assets', 'watch']);
