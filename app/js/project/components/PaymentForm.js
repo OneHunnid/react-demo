@@ -3,7 +3,7 @@ import PaymentStore from './../store/paymentStore';
 
 class InitialPaymentScreen extends React.Component {
   constructor(props) {
-    super(props)
+    super(props) 
   }
   render() {
     console.log(this.props);

@@ -39,9 +39,11 @@ let PaymentStore = {
 
     if (dataArray.every(checkForValidation) === false) {
       this.displayError();
+      return false;
     }
     else {
       this.removeError();
+      return true;
     }
   },
   sanitizeNameInput(name, field) {
@@ -143,13 +145,20 @@ let PaymentStore = {
     }
 
     // Displays and removes error messages
-    this.handleErrors(ccData);
+    const isValid = this.handleErrors(ccData);
 
+    if (isValid === true) {
+      this.displayThanks(isValid);
+    }
 
     // @TODO
     // 1) Format name, number and expiration when typing in real time
     // 2) If everything is valid, update state to display a thank you message
 
+  },
+  displayThanks(state) {
+    console.log("Thanks!")
+    return true;
   },
   init(e) {
     e.preventDefault;
