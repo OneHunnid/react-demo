@@ -121,8 +121,9 @@ let PaymentStore = {
       return cvvObj;
     }
   },
-  validateFields() {
-
+  validateFields(e) {
+    e.preventDefault;
+    
     const ccNameField = document.querySelector('.js-cc-name');
     const ccName = ccNameField.value;
     const ccNumberField = document.querySelector('.js-cc-number');
@@ -162,7 +163,7 @@ let PaymentStore = {
   },
   init(e) {
     e.preventDefault;
-    this.validateFields();
+    this.validateFields(e);
   },
 };
 
