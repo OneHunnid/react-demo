@@ -11,7 +11,7 @@ class InitialPaymentScreen extends React.Component {
       <div className="pay-form">
         <div className="pay-form-wrapper">
           <div className="pay-form-title">Payment Information</div>
-          <form className="payment-form js-error-hook">
+          <form className="payment-form js-error-hook" onSubmit={this.props.store.init.bind(this.props.store)}>
             <div className="payment-form-wrap payment-form-cc-name">
               <label className="payment-form-label">Name on Card</label>
               <input className="payment-form-input js-cc-name" maxLength="50" placeholder="Enter your name..." type="text"/>
@@ -28,7 +28,7 @@ class InitialPaymentScreen extends React.Component {
               <label className="payment-form-label">CVV</label>
               <input className="payment-form-input js-cc-cvv" placeholder="123" type="number"/>
             </div>
-            <div className="payment-form-submit" onClick={this.props.store.init.bind(this.props.store)}>Next</div>
+            <input type="submit" className="payment-form-submit" onClick={this.props.store.init.bind(this.props.store)} value="Next" />
           </form>
         </div>
       </div>

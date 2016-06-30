@@ -28,6 +28,22 @@ let PaymentStore = {
       parentNode.removeChild(node);
     }
   },
+  handleErrors(obj) {
+    const dataArray = Object.keys(obj).map(function(i) {
+      return obj[i];
+    });
+
+    const checkForValidation = function(i) {
+      return i;
+    };
+
+    if (dataArray.every(checkForValidation) === false) {
+      this.displayError();
+    }
+    else {
+      this.removeError();
+    }
+  },
   sanitizeNameInput(name, field) {
 
     if (hasWhitespace.test(name) || name === '') {
@@ -104,6 +120,7 @@ let PaymentStore = {
     }
   },
   validateFields() {
+
     const ccNameField = document.querySelector('.js-cc-name');
     const ccName = ccNameField.value;
     const ccNumberField = document.querySelector('.js-cc-number');
@@ -125,26 +142,17 @@ let PaymentStore = {
       "CC CVV": ccCVVNode,
     }
 
-    // If ccData is false, display error message
-    for (var i in ccData) {
-      if(ccData[i] == false) {
-        this.displayError();
-        console.log('adding error message');
-      }
-      else {
-        this.removeError();
-        console.log('removing error message')
-      }
-    }
+    // Displays and removes error messages
+    this.handleErrors(ccData);
 
-    // console.log(ccData);
 
     // @TODO
     // 1) Format name, number and expiration when typing in real time
     // 2) If everything is valid, update state to display a thank you message
 
   },
-  init() {
+  init(e) {
+    e.preventDefault;
     this.validateFields();
   },
 };
