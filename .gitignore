@@ -3,3 +3,4 @@ node_modules/
 app/styles/build.css
 app/styles/build.css.map
 app/js/build.js
+npm-debug.log
