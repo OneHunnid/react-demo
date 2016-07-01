@@ -1,11 +1,12 @@
 {
-  "name": "raspberry",
+  "name": "react-demo",
   "version": "1.0.0",
-  "description": "A delicious boilerplate for Gulp",
+  "description": "A demo site full of React components built by Chris Limbrick.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
+    "build": "gulp build",
     "deploy": "gulp deploy"
   },
   "author": "chris limbrick",
@@ -34,7 +35,7 @@
     "less-plugin-clean-css": "^1.5.1",
     "lodash": "^4.8.2",
     "lodash.assign": "^4.0.7",
-    "react": "^15.0.0",
+    "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.1.0",
     "react-dom": "^15.0.0",
     "react-router": "^2.5.0",

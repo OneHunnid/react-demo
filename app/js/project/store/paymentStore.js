@@ -123,7 +123,7 @@ let PaymentStore = {
   },
   validateFields(e) {
     e.preventDefault;
-    
+
     const ccNameField = document.querySelector('.js-cc-name');
     const ccName = ccNameField.value;
     const ccNumberField = document.querySelector('.js-cc-number');

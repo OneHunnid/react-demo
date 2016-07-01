@@ -22,7 +22,6 @@ var STYLE_BUILD = config.STYLE_BUILD;
 var JS_DEST = config.JS_DEST;
 var JS_BUILD = config.JS_BUILD;
 
-
 // Gulp Tasks
 gulp.task('js', require('./gulp/gulp-tasks/compileJS')(gulp, plugins, ENTRY_POINT, JS_BUILD, JS_DEST, plugins.util, source, plugins.sourcemaps, assign, plugins.concatSourcemap, exec, babel, watchify, browserify, plugins.connect));
 gulp.task('less', require('./gulp/gulp-tasks/compileStyles')(gulp, plugins, STYLE_BUILD, STYLE_DEST, plugins.util, plugins.less, plugins.concatSourcemap, plugins.connect));
@@ -31,5 +30,14 @@ gulp.task('connect', require('./gulp/gulp-tasks/webserver')(gulp, plugins, plugi
 gulp.task('watch', require('./gulp/gulp-tasks/watch')(gulp));
 gulp.task('copy-html', require('./gulp/gulp-tasks/copy-html')(gulp));
 gulp.task('copy-assets', require('./gulp/gulp-tasks/copy-assets')(gulp));
+gulp.task('copy-styles', require('./gulp/gulp-tasks/copy-styles')(gulp));
+gulp.task('copy-scripts', require('./gulp/gulp-tasks/copy-scripts')(gulp));
+
+// Copy built files to build folder
+gulp.task('build', ['copy-styles', 'copy-scripts', 'copy-assets', 'copy-html']);
+
+// Deploy build folder to a Github Pages branch for the world to see
 gulp.task('deploy', require('./gulp/gulp-tasks/deploy')(gulp, ghPages));
-gulp.task('default', ['js', 'less', 'connect', 'copy-html', 'copy-assets', 'watch']);
+
+// Default tasks
+gulp.task('default', ['js', 'less', 'connect', 'watch']);
